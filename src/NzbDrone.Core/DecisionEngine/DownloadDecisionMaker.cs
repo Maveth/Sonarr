@@ -81,7 +81,8 @@ namespace NzbDrone.Core.DecisionEngine
 
                         if (remoteEpisode.Series == null)
                         {
-                            decision = new DownloadDecision(remoteEpisode, new Rejection("Unknown Series"));
+                            remoteEpisode.DownloadAllowed = true; //Fuck you :) -following radarr's inital steps
+                            decision = GetDecisionForReport(remoteEpisode, searchCriteria);
                         }
                         else if (remoteEpisode.Episodes.Empty())
                         {
@@ -152,8 +153,10 @@ namespace NzbDrone.Core.DecisionEngine
             {
                 e.Data.Add("report", remoteEpisode.Release.ToJson());
                 e.Data.Add("parsed", remoteEpisode.ParsedEpisodeInfo.ToJson());
-                _logger.Error(e, "Couldn't evaluate decision on {0}", remoteEpisode.Release.Title);
-                return new Rejection($"{spec.GetType().Name}: {e.Message}");
+                _logger.Error(e, "Couldn't evaluate decision on " + remoteEpisode.Release.Title + ", with spec: " + spec.GetType().Name);
+                //return new Rejection(string.Format("{0}: {1}", spec.GetType().Name, e.Message));//TODO UPDATE SPECS!
+                //return null;
+
             }
 
             return null;

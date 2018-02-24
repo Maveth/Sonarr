@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using NzbDrone.Common.Extensions;
 using NzbDrone.Common.Http;
 using NzbDrone.Core.IndexerSearch.Definitions;
@@ -72,7 +72,7 @@ namespace NzbDrone.Core.Indexers.Rarbg
             return pageableRequests;
         }
 
-        private IEnumerable<IndexerRequest> GetPagedRequests(string mode, int? tvdbId, string query, params object[] args)
+        private IEnumerable<IndexerRequest> GetPagedRequests(string mode, int? tsdbId, string query, params object[] args)
         {
             var requestBuilder = new HttpRequestBuilder(Settings.BaseUrl)
                 .Resource("/pubapi_v2.php")
@@ -86,14 +86,14 @@ namespace NzbDrone.Core.Indexers.Rarbg
 
             requestBuilder.AddQueryParam("mode", mode);
 
-            if (tvdbId.HasValue)
+            if (tsdbId.HasValue)
             {
-                requestBuilder.AddQueryParam("search_tvdb", tvdbId.Value);
+                requestBuilder.AddQueryParam("search_tsdb", tsdbId.Value);
             }
 
             if (query.IsNotNullOrWhiteSpace())
             {
-                requestBuilder.AddQueryParam("search_string", string.Format(query, args));
+                //requestBuilder.AddQueryParam("search_string", string.Format(query, args));
             }
 
             if (!Settings.RankedOnly)
@@ -101,7 +101,7 @@ namespace NzbDrone.Core.Indexers.Rarbg
                 requestBuilder.AddQueryParam("ranked", "0");
             }
 
-            requestBuilder.AddQueryParam("category", "18;41;49");
+            requestBuilder.AddQueryParam("category", "Sports");
             requestBuilder.AddQueryParam("limit", "100");
             requestBuilder.AddQueryParam("token", _tokenProvider.GetToken(Settings));
             requestBuilder.AddQueryParam("format", "json_extended");

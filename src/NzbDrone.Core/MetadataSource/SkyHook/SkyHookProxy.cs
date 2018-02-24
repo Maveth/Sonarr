@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,6 +10,7 @@ using NzbDrone.Core.Exceptions;
 using NzbDrone.Core.MediaCover;
 using NzbDrone.Core.MetadataSource.SkyHook.Resource;
 using NzbDrone.Core.Tv;
+using Newtonsoft.Json;
 
 namespace NzbDrone.Core.MetadataSource.SkyHook
 {
@@ -26,24 +27,29 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
              _requestBuilder = requestBuilder.SkyHookTvdb;
             _logger = logger;
         }
-
-        public Tuple<Series, List<Episode>> GetSeriesInfo(int tvdbSeriesId)
+        //missing lots here. but as far as im getting for now. TOODO replicate tvdb with tsdb
+        public Tuple<Series, List<Episode>> GetSeriesInfo(int tsdbSeriesId)
         {
             var httpRequest = _requestBuilder.Create()
                                              .SetSegment("route", "shows")
-                                             .Resource(tvdbSeriesId.ToString())
+                                             .Resource(tsdbSeriesId.ToString())
                                              .Build();
 
             httpRequest.AllowAutoRedirect = true;
             httpRequest.SuppressHttpError = true;
 
             var httpResponse = _httpClient.Get<ShowResource>(httpRequest);
+            //string tsdbId = string.Format("{0:D4}", tsdbSeriesId);
+            //www.thesportsdb.com/api/v1/json/1/lookupleague.php?id=4346
+            //var tsdbRequest = new HttpRequest("http://www.thesportsdb.com/api/v1/json/1/lookupleague.php?id=" + tsdbId);
+            
+            //var httpResponse = _httpClient.Get(tsdbRequest);
 
             if (httpResponse.HasHttpError)
             {
                 if (httpResponse.StatusCode == HttpStatusCode.NotFound)
                 {
-                    throw new SeriesNotFoundException(tvdbSeriesId);
+                    throw new SeriesNotFoundException(tsdbSeriesId);
                 }
                 else
                 {
