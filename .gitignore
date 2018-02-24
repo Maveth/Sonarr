@@ -136,3 +136,5 @@ _start
 _temp_*/**/*
 
 src/.idea/
+package-lock.json
+package.json

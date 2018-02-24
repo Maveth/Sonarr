@@ -12,8 +12,8 @@ var SeasonPassLayout = require('./SeasonPass/SeasonPassLayout');
 var SeriesEditorLayout = require('./Series/Editor/SeriesEditorLayout');
 
 module.exports = NzbDroneController.extend({
-    addSeries : function(action) {
-        this.setTitle('Add Series');
+    addLeague : function(action) {
+        this.setTitle('Add League');
         this.showMainRegion(new AddSeriesLayout({ action : action }));
     },
 

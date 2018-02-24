@@ -4,8 +4,8 @@ var Controller = require('./Controller');
 module.exports = Marionette.AppRouter.extend({
     controller : new Controller(),
     appRoutes  : {
-        'addseries'                  : 'addSeries',
-        'addseries/:action(/:query)' : 'addSeries',
+        'addleague'                  : 'addLeague',
+        'addleague/:action(/:query)' : 'addLeague',
         'calendar'                   : 'calendar',
         'settings'                   : 'settings',
         'settings/:action(/:query)'  : 'settings',

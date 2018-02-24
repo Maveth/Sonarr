@@ -16,10 +16,10 @@ module.exports = Marionette.AppRouter.extend({
 
     setTitle : function(title) {
         title = title;
-        if (title === 'Sonarr') {
-            document.title = 'Sonarr';
+        if (title === 'Sportstarr') {
+            document.title = 'Sportstarr';
         } else {
-            document.title = title + ' - Sonarr';
+            document.title = title + ' - Sportstarr';
         }
 
         if (window.NzbDrone.Analytics && window.Piwik) {
