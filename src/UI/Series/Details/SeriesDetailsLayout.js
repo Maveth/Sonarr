@@ -33,6 +33,7 @@ module.exports = Marionette.Layout.extend({
         rename    : '.x-rename',
         search    : '.x-search',
         poster    : '.x-series-poster'
+		manualSearch : '.x-manual-search'
     },
 
     events : {
@@ -42,6 +43,7 @@ module.exports = Marionette.Layout.extend({
         'click .x-refresh'             : '_refreshSeries',
         'click .x-rename'              : '_renameSeries',
         'click .x-search'              : '_seriesSearch'
+		'click .x-manual-search'       : '_manualSearchL'
     },
 
     initialize : function() {
@@ -254,5 +256,17 @@ module.exports = Marionette.Layout.extend({
         } else {
             $('body').removeClass('backdrop');
         }
+		 },
+
+    _manualSearchL : function() {
+        console.warn("Manual Search started");
+        console.warn(this.model.get("seriesId"));
+        console.warn(this.model)
+        console.warn(this.episodeCollection);
+        vent.trigger(vent.Commands.ShowEpisodeDetails, {
+            episode        : this.episodeCollection.models[0],
+            hideSeriesLink : true,
+            openingTab     : 'search'
+        });
     }
 });
