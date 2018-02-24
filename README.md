@@ -1,8 +1,13 @@
-# Sonarr
+# Sportstarr
 
-Sonarr is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.
+Sportstarr is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.
 
-## Major Features Include:
+## Alpha 
+*much of this is still just a copy Sonarr
+
+## Major Features Will hopefully Include:
+
+* Allow multi-part episodes (Race.qualifying, Race.Practice, Race.Uncut, etc)
 
 * Support for major platforms: Windows, Linux, macOS, Raspberry Pi, etc.
 * Automatically detects new episodes
@@ -43,10 +48,3 @@ Sonarr is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS fee
 
 * [GNU GPL v3](http://www.gnu.org/licenses/gpl.html)
 * Copyright 2010-2017
-
-### Sponsors
-
-* [JetBrains](http://www.jetbrains.com/) for providing us with free licenses to their great tools
-    * [ReSharper](http://www.jetbrains.com/resharper/)
-    * [WebStorm](http://www.jetbrains.com/webstorm/)
-    * [TeamCity](http://www.jetbrains.com/teamcity/)
