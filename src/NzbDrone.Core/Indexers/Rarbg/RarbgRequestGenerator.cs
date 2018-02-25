@@ -72,7 +72,7 @@ namespace NzbDrone.Core.Indexers.Rarbg
             return pageableRequests;
         }
 
-        private IEnumerable<IndexerRequest> GetPagedRequests(string mode, int? tsdbId, string query, params object[] args)
+        private IEnumerable<IndexerRequest> GetPagedRequests(string mode, int? tvdbId, string query, params object[] args)
         {
             var requestBuilder = new HttpRequestBuilder(Settings.BaseUrl)
                 .Resource("/pubapi_v2.php")
@@ -86,9 +86,9 @@ namespace NzbDrone.Core.Indexers.Rarbg
 
             requestBuilder.AddQueryParam("mode", mode);
 
-            if (tsdbId.HasValue)
+            if (tvdbId.HasValue)
             {
-                requestBuilder.AddQueryParam("search_tsdb", tsdbId.Value);
+                requestBuilder.AddQueryParam("search_tvdb", tvdbId.Value);
             }
 
             if (query.IsNotNullOrWhiteSpace())

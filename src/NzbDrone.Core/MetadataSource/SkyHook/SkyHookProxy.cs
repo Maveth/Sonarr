@@ -27,29 +27,29 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
              _requestBuilder = requestBuilder.SkyHookTvdb;
             _logger = logger;
         }
-        //missing lots here. but as far as im getting for now. TOODO replicate tvdb with tsdb
-        public Tuple<Series, List<Episode>> GetSeriesInfo(int tsdbSeriesId)
+        //missing lots here. but as far as im getting for now. TOODO replicate tvdb with tvdb
+        public Tuple<Series, List<Episode>> GetSeriesInfo(int tvdbSeriesId)
         {
             var httpRequest = _requestBuilder.Create()
                                              .SetSegment("route", "shows")
-                                             .Resource(tsdbSeriesId.ToString())
+                                             .Resource(tvdbSeriesId.ToString())
                                              .Build();
 
             httpRequest.AllowAutoRedirect = true;
             httpRequest.SuppressHttpError = true;
 
             var httpResponse = _httpClient.Get<ShowResource>(httpRequest);
-            //string tsdbId = string.Format("{0:D4}", tsdbSeriesId);
-            //www.thesportsdb.com/api/v1/json/1/lookupleague.php?id=4346
-            //var tsdbRequest = new HttpRequest("http://www.thesportsdb.com/api/v1/json/1/lookupleague.php?id=" + tsdbId);
+            string tvdbId = string.Format("{0:D4}", tvdbSeriesId);
+            //www.thesportvdb.com/api/v1/json/1/lookupleague.php?id=4346
+            var tvdbRequest = new HttpRequest("http://www.thesportvdb.com/api/v1/json/1/lookupleague.php?id=" + tvdbId);
             
-            //var httpResponse = _httpClient.Get(tsdbRequest);
+            //var httpResponse = _httpClient.Get(tvdbRequest);
 
             if (httpResponse.HasHttpError)
             {
                 if (httpResponse.StatusCode == HttpStatusCode.NotFound)
                 {
-                    throw new SeriesNotFoundException(tsdbSeriesId);
+                    throw new SeriesNotFoundException(tvdbSeriesId);
                 }
                 else
                 {
