@@ -27,8 +27,8 @@ Handlebars.registerHelper('imdbUrl', function() {
     return 'http://imdb.com/title/' + this.imdbId;
 });
 
-Handlebars.registerHelper('tsdbUrl', function() {
-    return 'http://www.thesportsdb.com/league.php?l=' + this.tsdbId;
+Handlebars.registerHelper('tvdbUrl', function() {
+    return 'http://www.thetvdb.com/?tab=series&id=' + this.tvdbId;
 });
 
 Handlebars.registerHelper('tvRageUrl', function() {
